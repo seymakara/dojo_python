@@ -1,0 +1,25 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+div{
+    margin: 40px;
+    border: 2px solid black;
+    padding: 20px;
+}
+input, select, textarea{
+    margin-bottom: 20px;
+}
+h4{
+    text-decoration: underline;
+}
+h4, p{
+    margin-bottom: 20px;
+}
+p{
+    margin-left: 20px;
+}
+#goback{
+    margin-left: 20px;
+}
+

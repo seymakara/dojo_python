@@ -1,0 +1,65 @@
+<html>
+<html>
+    <head>
+        <meta charset = "UTF-8"> 
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+        <title>Wall Assignment</title>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Sign In</h1>
+            <form action="/process" method="post">
+                <input type="hidden" name="action" value="signin">
+        
+                <label for="email">Email:<input type="text" name="email" id="email"></label>
+        
+                <label for="password">Password:<input type="password" name="password" id="password"></label>
+        
+                <input type="submit" name="submit" value="Submit">
+            </form>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                {%if category == 'failsignin' %}
+                    <p style="color: red">{{message}}</p>
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+            {% endwith %}
+
+            <h1>Register</h1>
+            <form action="/process" method="post">
+                <input type="hidden" name="action" value="register">
+                <table style="width:400px">
+                    <tr>
+                        <th>First Name:</th>
+                        <th>Last Name:</th>
+                        <th>Email Address:</th>
+                        <th>Password:</th>
+                        <th>Confirm password:</th>
+                    </tr>
+                    <tr>
+                        <td><input type="text" name="firstname" id="firstname"></td>
+                        <td><input type="text" name="lastname" id="lastname"></td> 
+                        <td><input type="text" name="email" id="email"></td>
+                        <td><input type="password" name="password" id="password"></td>
+                        <td><input type="password" name="confirm" id="confirm"></td>
+                    </tr>
+                </table>
+                <br>
+                <input type="submit" name="submit" value="Submit">
+            </form>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                {%if category == 'failregister' %}
+                    <p style="color: red">{{message}}</p>
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+            {% endwith %}
+            
+        </div>
+    </body>
+</html>

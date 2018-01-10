@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    <title>Ninja Gold Game</title>
+</head>
+<body>
+    <div>
+        Your gold: {{gold}}
+    </div>
+    <div class="locations">
+        <h1 class="loc_content">Farm</h1>
+        <p class="loc_content">(earns 10-20 gold)</p>
+        <form action="/process" method ='post'>
+            <input type="hidden" name="action" value="farm">
+            <input class="submitgold" type="submit" name="Farm" value= "Find gold!">
+        </form>
+    </div>
+    <div class="locations">
+        <h1 class="loc_content">Cave</h1>
+        <p class="loc_content">(earns 5-10 gold)</p>
+        <form action="/process" method ='post'>
+            <input type="hidden" name="action" value="cave">
+            <input  class="submitgold" type="submit" name="Cave" value= "Find gold!">
+        </form>
+    </div>
+    <div class="locations">
+        <h1 class="loc_content">House</h1>
+        <p class="loc_content">(earns 2-5 gold)</p>
+        <form action="/process" method ='post'>
+            <input type="hidden" name="action" value="house">
+            <input class="submitgold" type="submit" name="House" value= "Find gold!">
+        </form>
+    </div>
+    <div class="locations">
+        <h1 class="loc_content">Casino</h1>
+        <p class="loc_content">(earns or loses 50 gold)</p>
+        <form action="/process" method ='post'>
+            <input type="hidden" name="action" value="casino">
+            <input class="submitgold" type="submit" name="Casino" value= "Find gold!">
+        </form>
+    </div>
+    
+    <p class="log">~~~ACTIVITIES~~~</p>
+    <div id="activity">
+        {%for i in log:%}
+            {%if i[0] == "-":%}
+                <p class="log"><font color="red">{{i}} {{logdate[loop.index0]}}</p>
+            {%else%}
+                <p class="log"><font color="green">{{i}} {{logdate[loop.index0]}}</p>
+            {%endif%}
+        {%endfor%}
+    </div>
+    <div>
+        <form action="/process" method ='post'>
+            <input type="hidden" name="action" value="reset">
+            <input type="submit" name="reset" value= "RESET">
+        </form>
+    </div>
+    
+    
+</body>
+</html>

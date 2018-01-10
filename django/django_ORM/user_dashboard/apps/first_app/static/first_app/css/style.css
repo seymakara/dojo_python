@@ -1,0 +1,21 @@
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+#registerbox, #signinbox, #newuser {
+    width: 250px;
+}
+
+.edituser, .editpw {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.comment {
+    margin-left: 40px;
+}
+
+.wrapper {
+    padding: 20px;
+}

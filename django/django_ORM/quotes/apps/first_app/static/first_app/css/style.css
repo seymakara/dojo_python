@@ -1,0 +1,14 @@
+.wrapper{
+    padding: 20px;
+}
+.infobox{
+    display: inline-block;
+    vertical-align: top;
+}
+.quotes{
+    display: inline-block;
+    vertical-align: top;
+}
+#quoteright{
+    margin-left: 200px;
+}

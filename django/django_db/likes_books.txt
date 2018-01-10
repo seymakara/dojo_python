@@ -1,0 +1,32 @@
+Have the second user create 2 other books.
+ Book.objects.create(name = "Book4", desc = "This is a book", uploader= user2)
+ Book.objects.create(name = "Book3", desc = "This is a book", uploader=user2)
+
+Have the third user create 2 other books.
+Book.objects.create(name = "Book5", desc = "This is a book", uploader = user3)
+Book.objects.create(name = "Book6", desc = "This is a book", uploader= user3)
+
+Have the first user like the last book and the first book
+    user1.liked_books.add(book1)
+    user1.liked_books.add(Book.objects.last())
+
+Have the second user like the first book and the third book
+    user2.liked_books.add(Book.objects.first())
+    user2.liked_books.add(book3)
+
+Have the third user like all books
+    user3.liked_books.add(*Book.objects.all())
+
+Display all users who like the first book
+    for user in book1.liked_by.all():
+    print user.first_name
+
+Display the user who uploaded the first book
+    book1.uploader.first_name
+
+Display all users who like the second book
+    for user in book2.liked_by.all():
+         print user.first_name
+
+Display the user who uploaded the second book
+    book2.uploader.first_name

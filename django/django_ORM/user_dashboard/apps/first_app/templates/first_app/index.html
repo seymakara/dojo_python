@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static%}
+    <link rel="stylesheet" href='{% static 'first_app/css/style.css' %}'>
+    <title>Home Page</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div id="top">
+            <p class="topnote" id="test">Test App</p>
+            <a class="topnote" id="home" href="/">Home</a>
+            <a class="topnote" id="signin" href="/signin">Sign in</a>
+        </div>
+
+        <div id="middle">
+            <h4>Welcome to the TestApp</h4>
+            <p>Leave messages to another user using this application just like other 12809438 application to message each other</p>
+            <p>Why you should prefer this particular one then? Because <span style = "font-weight: strong; color: red; font-size: 25px" >I</span> have spent my hours to build this.</p>
+            <button id="register"><a href="/register">Register</a></button>
+        </div>
+
+    </div>
+</body>
+</html>

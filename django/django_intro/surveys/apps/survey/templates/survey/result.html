@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Survey Form</title>
+    {% load static%}
+    <link rel="stylesheet" href='{% static 'survey/css/style.css' %}'>
+</head>
+<body>
+    <div>
+        <p>Thanks for submitting this form! you have submitted this form {{request.session.counter}} times now.</p>
+        <h4>Submitted Info</h4>
+            <p>Name: {{ request.session.name }} </p>
+            <p>Dojo Location: {{ request.session.location }} </p>
+            <p>Favorite Language: {{ request.session.language }} </p>
+            <p>Comment: {{ request.session.comment }} </p>
+        <form action="/">
+            <input type="submit" name="goback" value="Go Back" id="goback" >
+        </form>
+    </div>
+      
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static%}
+    <link rel="stylesheet" href='{% static 'first_app/css/style.css' %}'>
+    <title>Admin Dashboard</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div id="top">
+            <h2 class="topnote" id="test">Test App</h2>
+            <a class="topnote" id="dashboard" href="/dashboard/admin">Dashboard</a>
+            <a class="topnote" id="profile" href="/users/edit">Profile</a>
+            <a class="topnote" id="logout" href="/logout">Log out</a>
+        </div>
+        <div id="admin_main">
+            <h3>Manage Users</h3>
+            <a href="/users/new">Add new</a>
+            <br><br>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>email</th>
+                    <th>created_at</th>
+                    <th>user_level</th>
+                    <th>actions</th>
+                </tr>
+                {%for user in users%}
+                    <tr>
+                        <td>{{user.id}}</td>
+                        <td><a href="users/show/{{user.id}}">{{ user.first_name }} {{ user.last_name }}</a></td>
+                        <td>{{user.email}}</td>
+                        <td>{{user.created_at}}</td>
+                        <td>{%if user.id == 1%}
+                                admin
+                            {%else%}
+                                normal
+                            {%endif%}
+                        </td>
+                        <td><a href="/users/edit/{{user.id}}">edit</a> <a href=""></a> <a href="/users/remove/{{user.id}}">remove</a></td>
+                    </tr>
+                {%endfor%}
+            </table>
+        </div>
+    </div>
+</body>

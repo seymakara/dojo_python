@@ -1,0 +1,82 @@
+class Dojo(models.Model):
+    name = models.CharField(max_length = 255)
+    city = models.CharField(max_length = 255)
+    state = models.CharField(max_length = 2)
+    desc = models.TextField(blank = True, null = True)
+
+class Ninja(models.Model):
+    first_name = models.CharField(max_length = 255)
+    last_name = models.CharField(max_length = 255)
+    dojo = models.ForeignKey(Dojo, related_name = "ninjas")
+
+****** MANY TO MANY*****
+1)-----------------------
+class Book(models.Model):
+    name = models.CharField(max_length = 255)
+    desc = models.TextField()
+    created_at = models.DateTimeField(auto_now_add = True)
+    updated_at = models.DateTimeField(auto_now = True)
+
+class Author(models.Model):
+    first_name = models.CharField(max_length = 255)
+    last_name = models.CharField(max_length = 255)
+    email = models.CharField(max_length = 255)
+    created_at = models.DateTimeField(auto_now_add = True)
+    updated_at = models.DateTimeField(auto_now = True)
+    notes = models.TextField(blank = True, null = True)
+    books = models.ManyToManyField(Book, related_name= "authors")
+2)-------------------------
+class User(models.Model):
+    first_name = models.CharField(max_length = 255)
+    last_name = models.CharField(max_length = 255)
+    email = models.CharField(max_length = 255)
+    created_at = models.DateTimeField(auto_now_add = True)
+    updated_at = models.DateTimeField(auto_now = True)
+
+class Book(models.Model):
+    name = models.CharField(max_length = 255)
+    desc = models.CharField(max_length = 255)
+    created_at = models.DateTimeField(auto_now_add = True)
+    updated_at = models.DateTimeField(auto_now = True)
+    uploader = models.ForeignKey(User, related_name="uploaded_books")
+    liked_by = models.ManyToManyField(User, related_name= "liked_books")
+
+**************************
+
+python manage.py makemigrations
+
+python manage.py migrate
+
+python manage.py shell
+from apps.{{app_name}}.models import *
+
+
+Dojo.objects.create(name = "CodingDojo Seattle", city = "Seattle", state="WA")
+Dojo.objects.create(name = "CodingDojo New York", city ="New York", state= "NY")
+Dojo.objects.create(name = "CodingDojo Silicon Valley", city ="Mountain View", state = "CA")
+
+Dojo.objects.all().delete()
+
+"Create 3 ninjas that belong to the first dojo you created":
+first_dojo = Dojo.objects.get(id=4)
+Ninja.objects.create(dojo = first_dojo, first_name = "Seyma", last_name= "Akin")
+Ninja.objects.create(dojo = first_dojo, first_name = "Halil", last_name= "Akin")
+Ninja.objects.create(dojo = first_dojo, first_name = "Halide", last_name = "Akin")
+
+
+"Be able to retrieve all ninjas that belong to the first Dojo": Dojo.objects.first().ninjas.all() / first_dojo.ninjas.all()
+
+"Be able to retrieve all ninjas that belong to the last Dojo": Dojo.objects.last().ninjas.all()
+
+** desc = models.TextField(blank = True, null = True)
+
+** Assigning the fourth author to all the books)
+
+fourth_author= Author.objects.get(id=4)
+fourth_author.books.add(*Book.objects.all())
+
+** For the 3rd book, retrieve all the authors
+third_book.authors.all()
+
+**For the 3rd book, remove the first author
+second_book.authors.remove(first_author)

@@ -1,0 +1,19 @@
+<html>
+    <head>
+      <title>Success Page</title>
+    </head>
+    <body>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <p style="color : red">{{message}}</p>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+      <form action='/form' method='POST'>
+        <label for="email">Email:<input type="text" name="email" id="email"></label>
+        <input type="submit" value="Add">
+      </form>
+    </body>
+    </html>
+    

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static%}
+    <link rel="stylesheet" href='{% static 'first_app/css/style.css' %}'>
+    <title>Add a Course</title>
+</head>
+<body>
+    <div id="wrapper">
+        <h3>Add a new course</h3>
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+        <form action ='/create' method='post'>
+            {% csrf_token %}
+            <label for="name"> Name:</label>
+            <input class="name" type="text" name ="name" size="30"><br><br>
+
+            <label for="description"> Description:</label>
+            <input class="description" type="text" name ="description" size="60"><br><br>
+
+            <input class = "submit" type="submit" value="Add">
+            <input type="reset"><br><br>
+        </form>
+
+        <h3>Courses</h3>
+        <table>
+            <tr>
+                <th>Course Name</th>
+                <th>Description</th>
+                <th>Date Added</th>
+                <th>Actions</th>
+            </tr>
+            {%for course in courses%}
+                <tr>
+                    <td>{{course.name}}</td>
+                    <td>{{course.description.text}}</td>
+                    <td>{{ course.created_at }}</td>
+                    <td><a href="/destroyconfirm/{{course.id}}">Remove</a> | <a href="/comment/{{course.id}}">Make Comment</a></td>
+                </tr>
+            {% endfor %}
+        </table><br>
+    </div>
+    
+</body>
+</html>

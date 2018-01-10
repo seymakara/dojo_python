@@ -1,0 +1,54 @@
+Author.objects.create(first_name = "Mike",last_name = "kwargs", email ="mike@mike.com")
+Author.objects.create(first_name = "Speros",last_name = "Kwargs", email= "mike@speros.com")
+Author.objects.create(first_name = "John",last_name = "Kwargs", email ="mike@john.com")
+Author.objects.create(first_name = "Jadee",last_name = "Kwargs", email= "mike@jadee.com")
+Author.objects.create(first_name = "Jay",last_name = "Kwargs", email ="mike@jay.com")
+
+from apps.book_authors.models import *
+
+fifth_book = Book.objects.get(id=5)
+fifth_book.name = "C#"
+fifth_book.save()
+
+fifth_author = Author.objects.get(id = 5)
+fifth_author.first_name = "Ketul"
+fifth_author.save()
+
+second_author = Author.objects.get(id = 2)
+first_book = Book.objects.get(id=1)
+second_author.books.add(first_book)
+
+second_book = Book.objects.get(id=2)
+second_author.books.add(second_book)
+
+third_book = Book.objects.get(id=3)
+second_author.books.add(third_book)
+
+first_author = Author.objects.get(id=1)
+first_author.books.add(first_book)
+first_author.books.add(second_book)
+
+third_author = Author.objects.get(id=3)
+third_author.books.add(first_book)
+third_author.books.add(second_book)
+third_author.books.add(third_book)
+
+fourth_book= Book.objects.get(id=4)
+third_author.books.add(fourth_book)
+
+fourth_author= Author.objects.get(id=4)
+
+fourth_author.books.add(*Book.objects.all())
+
+third_book.authors.all()
+<QuerySet [<Author: Author object>, <Author: Author object>, <Author: Author object>]>
+
+fifth_author.books.add(second_book)
+
+third_author.books.all()
+<QuerySet [<Book: Book object>, <Book: Book object>, <Book: Book object>, <Book: Book object>]>
+
+second_author.books.all()
+<QuerySet [<Book: Book object>, <Book: Book object>, <Book: Book object>]>
+
+second_book.authors.remove(first_author)

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Wall Assignment</title>
+</head>
+<body>
+    <h3 style="text-align : center">Meaningless Page</h3>
+    <form action="/logout" method="post">
+        <input type="submit" value="Logout">
+    </form><br>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {%for message in messages:%}
+        <p style="color: green">{{message}}</p>
+        {%endfor%}
+    {%endif%}
+    {%endwith%}
+
+    <form action="/process_message" method='post'>
+        <input type="hidden" name="action" value="message">
+        <label for="message">Post a message </label><br>
+        <textarea name="message" cols="180" rows="8"></textarea><br>
+        <input class=submit type="submit" value="Post a message"><br>
+    </form>
+    <br><br>
+
+    {% for message in all_messages: %}
+        <tr>
+            <h3>{{ message['first_name'] }} {{ message ['last_name'] }} {{message['created_at']}}</h3>
+            <p>{{message['message']}}</p>
+                {% for comment in all_comments: %}
+                    {%if message['id'] == comment['message_id']%}
+                    <h5>{{comment['first_name'] }} {{comment['last_name'] }} {{ comment['created_at'] }}</h5>
+                    <p>{{comment['comment']}}</p>
+                    {%endif%}
+                {% endfor %}
+
+            <form action="/process_comment" method='post'>
+                <input type="hidden" name="action" value="{{message['id']}}">
+                <textarea name="comment" cols="180" rows="4"></textarea><br>
+                <input class=submit type="submit" value="Leave a comment"><br>
+                <hr>
+            </form>
+        </tr>
+    {% endfor %}
+</body>
+</html>

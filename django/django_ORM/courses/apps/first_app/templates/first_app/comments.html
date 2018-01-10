@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static%}
+    <link rel="stylesheet" href='{% static 'first_app/css/style.css' %}'>
+    <title>Write a Comment</title>
+</head>
+<body>
+    <div>
+        <h3>Please write your comment about the course: {{course.name}}</h3>
+        {% if course.description.text %}
+        <h3>Decription</h3>
+        <p>{{course.description.text}}</p>
+        {% else %}
+        <h3>No description about this course</h3>
+        {% endif %}
+
+
+        <form action="/createcomment" method="post">
+        {% csrf_token %}
+            <input type="hidden" name="id" value="{{course.id}}" />
+            <label for="comment">Comment:</label><br>
+            <textarea name="comment" rows="4" cols="40"></textarea><br>
+            <input type="submit"></input>
+        </form>
+
+        <h3>Comments:</h3>
+        {% for comment in comment %}
+            <p>{{comment.text}}</p>
+        {% endfor %}
+    </div>
+    
+</body>
+</html>

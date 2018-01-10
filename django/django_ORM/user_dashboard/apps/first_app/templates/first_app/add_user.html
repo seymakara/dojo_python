@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static%}
+    <link rel="stylesheet" href='{% static 'first_app/css/style.css' %}'>
+    <title>New User</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div id="top">
+            <h2 class="topnote" id="test">Test App</h2>
+            <a class="topnote" id="dashboard" href="/dashboard/admin">Dashboard</a>
+            <a class="topnote" id="profile" href="/users/edit">Profile</a>
+            <a class="topnote" id="logout" href="/logout">Log out</a>
+        </div>
+        <br>
+        <button><a href="/dashboard/admin">Return to Dashboard</a></button> 
+        {% for message in messages %}
+            <p>{{ message.message }}</p>
+        {% endfor %}
+        <form id="newuser" action="/process_new" method="post">
+            {% csrf_token %}
+            <fieldset>
+                <legend><h3>Add a new user</h3></legend>
+                Email: <input type="text" name="email">
+                <br><br>
+                First Name: <input type="text" name="first_name">
+                <br><br>
+                Last Name: <input type="text" name="last_name">
+                <br><br>
+                Password: <input type="password" name="pw">
+                <br>
+                <p>*Password should be at least 8 characters</p>
+                Confirm Password: <input type="password" name="pw_confirm">
+                <br><br>
+                <input type="submit" name="submit" value="Create">
+            </fieldset>
+        </form>
+    </div>
+</body>
+</html>

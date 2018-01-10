@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dojo Survey Index</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div>
+        <h4>Submitted Info</h4>
+            <p>Name: {{firstname}} </p>
+            <p>Dojo Location: {{location}} </p>
+            <p>Favorite Language: {{language}} </p>
+            <p>Comment: {{comment}} </p>
+        <form action="/">
+            <input type="submit" name="goback" value="Go Back" id="goback" >
+        </form>
+    </div>
+      
+</body>
+</html>

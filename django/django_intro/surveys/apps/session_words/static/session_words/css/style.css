@@ -1,0 +1,11 @@
+#left, #right {
+    display: inline-block;
+    vertical-align: top;
+}
+body{
+    padding: 30px;
+}
+
+#right{
+    margin-left: 30px;
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static%}
+    <link rel="stylesheet" href='{% static 'first_app/css/style.css' %}'>
+    <title>Quotes</title>
+</head>
+<body>
+    <div class="wrapper">
+        <h5><a href="/logout">Logout</a></h5>
+        <h3>Welcome, {{ myself.first_name }}!</h3>
+        <div class="quotes">
+            <h3>Quotable Quotes:</h3>
+                <div>
+                    {% for quote in notmines %}
+                        <p>{{quote.owner}}: {{quote.content}}</p>
+                        <p>Posted by: <a href="/users/{{quote.uploader.id}}">{{quote.uploader.first_name}}</a></p>
+                        <a href="/quotes/add/{{quote.id}}"><button>Add To My List</button></a>                        
+                    {% endfor %}
+                </div>
+        </div> 
+
+        <div class="quotes" id="quoteright">
+            <h3>Your Favorites</h3>
+                <div>
+                    {% for quote in myself.favorite_quotes.all %}
+                        <p>{{quote.owner}}: {{quote.content}}</p>
+                        <p>Posted by: <a href="/users/{{quote.uploader.id}}">{{quote.uploader.first_name}}</a></p>
+                        <a href="/quotes/remove/{{quote.id}}"><button>Remove From My List</button></a>
+                    {% endfor %}
+                </div>
+        </div>
+        <div id="addquote">
+            <h3>Contribute a Quote</h3>
+            {% for message in messages %}
+                <p>{{ message.message }}</p>
+            {% endfor %}
+            <form action="quotes/create/{{request.session.id}}" method="post">
+                {% csrf_token %}
+                Quoted By: <input type="text" name = "owner">
+                <br><br>
+                <label for="message">Message:</label><br>
+                <textarea rows="6" cols="40" name="quote"></textarea>
+                <br>
+                <input type="submit" value="Submit" >
+            </form>
+        </div>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static%}
+    <link rel="stylesheet" href='{% static 'first_app/css/style.css' %}'>
+    <title>User Information</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div id="top">
+            <h2 class="topnote" id="test">Test App</h2>
+            <a class="topnote" id="dashboard" href="/dashboard">Dashboard</a>
+            <a class="topnote" id="profile" href="/users/edit">Profile</a>
+            <a class="topnote" id="logout" href="/logout">Log out</a>
+         </div>
+
+        <h3>{{user.first_name}} {{user.last_name}}</h3>
+        <p>User ID: #{{user.id}}</p> 
+        <p>Registered at: {{user.created_at}}</p> 
+        <p>Email address: {{user.email}}</p> 
+        <h4>Leave a message for {{user.first_name}}</h4>
+        <form action="/process_message/{{user.id}}" method='post'>
+            {% csrf_token %}
+            <textarea name="message" cols="180" rows="8"></textarea><br>
+            <input class=submit type="submit" value="Post"><br>
+        </form>
+        <br>
+
+        {% for message in messages %}
+            <tr>
+                <h3><a href="/users/show/{{message.sender.id}}">{{ message.sender.first_name}} {{ message.sender.last_name}}</a> {{message.created_at}}</h3>
+                <p>{{message.message}}</p>
+                    {% for comment in comments %}
+                        {%if message.id == comment.message_id %}
+                            <h5 class="comment"><a href="/users/show/{{comment.sender.id}}">{{comment.sender.first_name}} {{comment.sender.last_name}}</a>{{ comment.created_at}}</h5>
+                            <p class="comment">{{comment.comment}}</p>
+                        {%endif%}
+                    {% endfor %}
+    
+                <form action="/process_comment/{{user.id}}" method='post'>
+                    {% csrf_token %}
+                    <input type="hidden" name="messageid" value="{{message.id}}">
+                    <textarea name="comment" cols="180" rows="4"></textarea><br>
+                    <input class=submit type="submit" value="Comment"><br>
+                </form>
+            </tr>
+        {% endfor %}
+    </div>
+</body>
+</html>
